@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
-    
+    <h1 class="main-heading">AI Personal Assistant</h1>
+
+    <div class="container">
+
+        <h2>Ask Anything</h2>
+        <form id=""askForm>
+            <input type="text" name="question" placeholder="Ask anything.." required>
+            <button type="submit">Ask</button>
+        </form>
+        <p class="ask-loading" style="display: none;">Processing...</p>
+        <p id="answer"></p>
+
+        <h2>Summarize Email</h2>
+        <form id=""emailForm>
+            <textarea type="text" name="email" placeholder="Paste your email here" required></textarea>
+            <button type="submit">Summarize</button>
+        </form>
+        <p class="ask-loading" style="display: none;">Processing...</p>
+        <p id="answer"></p>
+    </div>
 </body>
 </html>
