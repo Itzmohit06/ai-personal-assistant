@@ -23,17 +23,32 @@ def ask():
         input=[
                 {"role": "system", "content": "Act like a helpful personal assistant"},
                 {"role": "user", "content": question}
-            ],
-            temperature=0.7,
-            max_output_tokens=512
+        ],
+        temperature=0.7,
+        max_output_tokens=512
     )
         
     answer = response.output_text.strip()
     return jsonify({"response": answer}), 200
 
-@app.route("/summarize")
+@app.route("/summarize", methods=["POST"])
 def summarize():
-    return ""
+    email_text = request.form.get("email")
+    prompt = f"summarize the following email in 2-3 sentences: {email_text}"
+        
+    response = client.responses.create(
+        model="gpt-5.4",
+        input=[
+                {"role": "system", "content": "Act like an expert email assistant"},                
+                {"role": "user", "content": prompt}
+        ],
+        temperature=0.3,
+        max_output_tokens=512
+    )
+        
+    summary = response.output_text.strip()
+    return jsonify({"response": summary}), 200
+
 
 if __name__ == "__main__":
     app.run(debug=True)
